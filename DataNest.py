@@ -19,13 +19,13 @@ components.html("""
 </script>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6601SMNJT4"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK988X9GTZ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-6601SMNJT4');
+  gtag('config', 'G-SK988X9GTZ');
 </script>
 """, height=0)
 
