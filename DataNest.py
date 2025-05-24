@@ -17,16 +17,20 @@ st.markdown("""
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "rnynbnc8ad");
 </script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK988X9GTZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SK988X9GTZ');
-</script>
 """, unsafe_allow_html=True)
+
+GA_TRACKING_ID = "G-SK988X9GTZ"
+
+components.html(f"""
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_TRACKING_ID}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){{dataLayer.push(arguments);}}
+        gtag('js', new Date());
+        gtag('config', '{GA_TRACKING_ID}');
+    </script>
+""", height=1)
 
 # Titolo del sito web
 st.title("DataNest: the smart place for smart data")
