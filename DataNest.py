@@ -39,7 +39,7 @@ if "dataset_originale" not in st.session_state:
     st.session_state.dataset_originale=None
 if "dataset_modificato" not in st.session_state:
     st.session_state.dataset_modificato=None
-# Inizializzazione la variabile per il popup di annullamento
+# Inizializzazione della variabile per il popup di annullamento
 if "mostra_popup_annulla" not in st.session_state:
     st.session_state.mostra_popup_annulla=False
 
