@@ -6,7 +6,4 @@ altair
 numpy
 scipy
 openpyxl
-pathlib
 beautifulsoup4
-logging
-shutil
