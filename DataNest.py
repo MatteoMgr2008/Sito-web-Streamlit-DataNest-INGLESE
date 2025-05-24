@@ -7,13 +7,13 @@ import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
 
-# Inietta lo script di Microsoft Clarity e di Google Tag per analisi comportamento utenti
-components.html("""
+# Inietta gli script di Microsoft Clarity e Google Tag per l'analisi del comportamento degli utenti
+st.markdown("""
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/" + i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "rnynbnc8ad");
 </script>
@@ -24,21 +24,22 @@ components.html("""
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-SK988X9GTZ');
 </script>
-""", height=0)
+""", unsafe_allow_html=True)
 
+# Titolo del sito web
 st.title("DataNest: the smart place for smart data")
 
+# Caricamento di un file CSV o XLSX nel sito web
 file_caricato=st.file_uploader("Upload a CSV/XLSX file:", type=["csv", "xlsx"])
 
-# Inizializza la session_state
+# Inizializzazione della session_state
 if "dataset_originale" not in st.session_state:
     st.session_state.dataset_originale=None
 if "dataset_modificato" not in st.session_state:
     st.session_state.dataset_modificato=None
-# Inizializza variabile per popup annulla
+# Inizializzazione la variabile per il popup di annullamento
 if "mostra_popup_annulla" not in st.session_state:
     st.session_state.mostra_popup_annulla=False
 
