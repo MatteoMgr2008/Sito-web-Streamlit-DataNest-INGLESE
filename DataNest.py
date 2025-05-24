@@ -6,8 +6,12 @@ import altair as alt
 import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
+import pathlib
+from bs4 import BeautifulSoup
+import logging
+import shutil
 
-# Inietta gli script di Microsoft Clarity e Google Tag per l'analisi del comportamento degli utenti
+# Inietta lo script di Microsoft Clarity per l'analisi del comportamento degli utenti
 st.markdown("""
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
@@ -17,16 +21,36 @@ st.markdown("""
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "rnynbnc8ad");
 </script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK988X9GTZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SK988X9GTZ');
-</script>
 """, unsafe_allow_html=True)
+
+# Inietta lo script di Google Tag per l'analisi del comportamento degli utenti
+def inject_ga():
+    GA_ID = "google_analytics"
+    GA_JS = """
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SK988X9GTZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SK988X9GTZ');
+    </script>
+    """
+    # Inserisce lo script nel tag head del template statico all’interno del tuo ambiente virtuale
+    index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
+    logging.info(f'editing {index_path}')
+    soup = BeautifulSoup(index_path.read_text(), features="html.parser")
+    if not soup.find(id=GA_ID): 
+        bck_index = index_path.with_suffix('.bck')
+        if bck_index.exists():
+            shutil.copy(bck_index, index_path)  
+        else:
+            shutil.copy(index_path, bck_index)  
+        html = str(soup)
+        new_html = html.replace('<head>', '<head>\n' + GA_JS)
+        index_path.write_text(new_html)
+inject_ga()
 
 # Titolo del sito web
 st.title("DataNest: the smart place for smart data")
