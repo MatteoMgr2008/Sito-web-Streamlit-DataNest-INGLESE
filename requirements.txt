@@ -6,5 +6,4 @@ altair
 numpy
 scipy
 openpyxl
-pymongo
-git+https://github.com/jrieke/streamlit-analytics.git
+streamlit-analytics
