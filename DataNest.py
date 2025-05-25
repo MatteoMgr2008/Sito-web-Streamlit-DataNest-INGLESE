@@ -6,6 +6,33 @@ import altair as alt
 import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
+from pymongo import MongoClient
+from streamlit_analytics import streamlit_analytics
+import datetime
+
+# MongoDB setup
+MONGO_URI = "mongodb+srv://admin:tFJgYGpJE0h5OB7y@progettodatanest.ckdtfq0.mongodb.net/?retryWrites=true&w=majority&appName=ProgettoDataNest"
+client = MongoClient(MONGO_URI)
+db = client["mydatabase"]
+collection = db["analytics"]
+
+# Funzione per salvare i dati in MongoDB
+def salva_analytics(dati):
+    try:
+        collection.insert_one(dati)
+    except Exception as e:
+        print(f"Errore nel salvataggio su MongoDB: {e}")
+
+# Avvia il tracker automatico di streamlit_analytics
+with streamlit_analytics():
+    # Cattura qualche info semplice da salvare (esempio)
+    dati_da_salvare = {
+        "timestamp": datetime.datetime.utcnow(),
+        "pagina": "DataNest app",
+        "user_agent": st.experimental_user_agent(),  # info browser utente
+        "session_id": st.session_state.get("session_id", "no_session_id")
+    }
+    salva_analytics(dati_da_salvare)
 
 # Inietta gli script di Microsoft Clarity e Google Tag per l'analisi del comportamento degli utenti
 st.markdown("""
