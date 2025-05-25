@@ -17,8 +17,8 @@ logging.basicConfig(
 
 # Avvia il tracciamento con salvataggio cloud automatico
 streamlit_analytics.start_tracking(
-    cloud_provider="streamlit", # Usa l'infrastruttura di Streamlit
-    verbose=True
+    load_from_json="analytics.json", # File dove salvare i dati log
+    verbose=True  # Mostra log nella console
 )
 
 # Inietta gli script di Microsoft Clarity e Google Tag per l'analisi del comportamento degli utenti
@@ -194,7 +194,9 @@ else:
     st.write("No file uploaded yet.")
     
 # Ferma il tracciamento
-streamlit_analytics.stop_tracking()
+streamlit_analytics.stop_tracking(
+    save_to_json="analytics.json" # Salva i dati al termine del monitoraggio
+)
 
 # Logga i dati nella console di Streamlit
 logging.info("Analytics Streamlit data: %s", streamlit_analytics.get_data())
