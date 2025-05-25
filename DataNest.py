@@ -10,7 +10,7 @@ from pymongo import MongoClient
 import datetime
 
 # MongoDB setup
-MONGO_URI = "mongodb+srv://admin:tFJgYGpJE0h5OB7y@progettodatanest.ckdtfq0.mongodb.net/?retryWrites=true&w=majority&appName=ProgettoDataNest"
+MONGO_URI = "mongodb+srv://admin:<tFJgYGpJE0h5OB7y>@progettodatanest.ckdtfq0.mongodb.net/?retryWrites=true&w=majority&appName=ProgettoDataNest"
 client = MongoClient(MONGO_URI)
 db = client["mydatabase"]
 collection = db["analytics"]
