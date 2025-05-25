@@ -7,7 +7,7 @@ import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
 from pymongo import MongoClient
-import streamlit_analytics
+from streamlit_analytics import track
 import datetime
 
 # MongoDB setup
@@ -24,7 +24,7 @@ def salva_analytics(dati):
         print(f"Errore nel salvataggio su MongoDB: {e}")
 
 # Avvia il tracker automatico di streamlit_analytics
-with streamlit_analytics():
+with track():
     # Cattura qualche info semplice da salvare (esempio)
     dati_da_salvare = {
         "timestamp": datetime.datetime.utcnow(),
