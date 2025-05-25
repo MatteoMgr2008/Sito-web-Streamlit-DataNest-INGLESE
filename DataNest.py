@@ -8,6 +8,9 @@ from scipy.stats import zscore
 import streamlit.components.v1 as components
 import streamlit_analytics
 import logging
+import os
+
+ANALYTICS_FILE=os.path.join(os.getcwd(), "analytics.json")
 
 # Configurazione di logging per Streamlit Cloud
 logging.basicConfig(
@@ -17,7 +20,7 @@ logging.basicConfig(
 
 # Avvia il tracciamento con salvataggio cloud automatico
 streamlit_analytics.start_tracking(
-    load_from_json="analytics.json", # File dove salvare i dati log
+    load_from_json=ANALYTICS_FILE, # File dove salvare i dati log
     verbose=True  # Mostra log nella console
 )
 
@@ -195,7 +198,7 @@ else:
     
 # Ferma il tracciamento
 streamlit_analytics.stop_tracking(
-    save_to_json="analytics.json" # Salva i dati al termine del monitoraggio
+    save_to_json=ANALYTICS_FILE # Salva i dati al termine del monitoraggio
 )
 
 # Logga i dati nella console di Streamlit
