@@ -6,29 +6,20 @@ import altair as alt
 import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
-from pymongo import MongoClient
-import datetime
+import streamlit_analytics
+import logging
 
-# MongoDB setup
-MONGO_URI = "mongodb+srv://admin:<tFJgYGpJE0h5OB7y>@progettodatanest.ckdtfq0.mongodb.net/?retryWrites=true&w=majority&appName=ProgettoDataNest"
-client = MongoClient(MONGO_URI)
-db = client["ProgettoDataNest"]
-collection = db["Info_User"]
+# Configurazione di logging per Streamlit Cloud
+logging.basicConfig(
+    level=logging.DEBUG, # Livello più basso (include tutti i livelli sopra)
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
-# Funzione per salvare i dati in MongoDB
-def salva_analytics(dati):
-    try:
-        collection.insert_one(dati)
-    except Exception as e:
-        print(f"Errore nel salvataggio su MongoDB: {e}")
-
-# Salvataggio automatico info base utente/sessione ogni volta che si esegue lo script
-dati_da_salvare = {
-    "timestamp": datetime.datetime.utcnow(),
-    "pagina": "DataNest app",
-    "session_id": st.session_state.get("session_id", "no_session_id")
-}
-salva_analytics(dati_da_salvare)
+# Avvia il tracciamento con salvataggio cloud automatico
+streamlit_analytics.start_tracking(
+    cloud_provider="streamlit", # Usa l'infrastruttura di Streamlit
+    verbose=True
+)
 
 # Inietta gli script di Microsoft Clarity e Google Tag per l'analisi del comportamento degli utenti
 st.markdown("""
@@ -42,7 +33,7 @@ st.markdown("""
 </script>
 """, unsafe_allow_html=True)
 
-GA_TRACKING_ID = "G-SK988X9GTZ"
+GA_TRACKING_ID="G-SK988X9GTZ"
 
 components.html(f"""
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -201,3 +192,9 @@ if file_caricato is not None:
 else:
     st.write("Waiting for file upload...")
     st.write("No file uploaded yet.")
+    
+# Ferma il tracciamento
+streamlit_analytics.stop_tracking()
+
+# Logga i dati nella console di Streamlit
+logging.info("Analytics Streamlit data: %s", streamlit_analytics.get_data())
