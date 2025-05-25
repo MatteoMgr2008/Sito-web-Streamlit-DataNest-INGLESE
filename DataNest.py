@@ -7,7 +7,7 @@ import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
 from pymongo import MongoClient
-from streamlit_analytics import streamlit_analytics
+import streamlit_analytics
 import datetime
 
 # MongoDB setup
