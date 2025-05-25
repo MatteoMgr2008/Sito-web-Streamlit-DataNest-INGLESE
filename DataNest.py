@@ -26,7 +26,6 @@ def salva_analytics(dati):
 dati_da_salvare = {
     "timestamp": datetime.datetime.utcnow(),
     "pagina": "DataNest app",
-    "user_agent": st.experimental_user_agent(),
     "session_id": st.session_state.get("session_id", "no_session_id")
 }
 salva_analytics(dati_da_salvare)
