@@ -6,3 +6,5 @@ altair
 numpy
 scipy
 openpyxl
+pymongo
+streamlit-analytics
