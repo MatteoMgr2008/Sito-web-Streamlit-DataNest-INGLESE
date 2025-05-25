@@ -6,4 +6,4 @@ altair
 numpy
 scipy
 openpyxl
-streamlit-analytics
+streamlit-analytics==0.4.0
