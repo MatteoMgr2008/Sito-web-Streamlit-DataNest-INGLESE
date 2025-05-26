@@ -6,6 +6,23 @@ import altair as alt
 import numpy as np
 from scipy.stats import zscore
 import streamlit.components.v1 as components
+import os
+from PIL import Image
+
+percorso_file_favicon=os.path.join("assets", "favicon.ico")
+file_icona=Image.open(percorso_file_favicon)
+
+st.set_page_config(
+    page_title="DataNest: the smart place for smart data", # Titolo della scheda del browser
+    page_icon=file_icona, # Icona personalizzata
+    layout="wide", # Impostazione "wide" del layout
+    initial_sidebar_state="auto", # Impostazione automatica della sidebar
+    menu_items={
+    "Get Help": "https://github.com/MatteoMgr2008/Sito-web-Streamlit-DataNest#readme",
+    "Report a bug": "https://github.com/MatteoMgr2008/Sito-web-Streamlit-DataNest/issues",
+    "About": "# DataNest v1.0\nCreated with ❤️ by Matteo Magrino"
+    }
+)
 
 # Inietta gli script di Microsoft Clarity e Google Tag per l'analisi del comportamento degli utenti
 st.markdown("""
@@ -19,7 +36,7 @@ st.markdown("""
 </script>
 """, unsafe_allow_html=True)
 
-GA_TRACKING_ID = "G-SK988X9GTZ"
+GA_TRACKING_ID="G-SK988X9GTZ"
 
 components.html(f"""
     <!-- Global site tag (gtag.js) - Google Analytics -->
