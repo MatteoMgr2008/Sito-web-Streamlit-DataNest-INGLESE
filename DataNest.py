@@ -18,9 +18,9 @@ st.set_page_config(
     layout="wide", # Impostazione "wide" del layout
     initial_sidebar_state="auto", # Impostazione automatica della sidebar
     menu_items={
-    "Get Help": "https://github.com/MatteoMgr2008/Sito-web-Streamlit-DataNest#readme",
+    "Get help": "https://github.com/MatteoMgr2008/Sito-web-Streamlit-DataNest#readme",
     "Report a bug": "https://github.com/MatteoMgr2008/Sito-web-Streamlit-DataNest/issues",
-    "About": "# DataNest v1.0\nCreated with ❤️ by Matteo Magrino"
+    "About": "# DataNest v1.0.0\nCreated with ❤️ by Matteo Magrino"
     }
 )
 
