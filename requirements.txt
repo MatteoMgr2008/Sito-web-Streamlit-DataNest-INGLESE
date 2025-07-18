@@ -1,8 +1,9 @@
-streamlit
-pandas
-matplotlib
-plotly
 altair
+matplotlib
 numpy
-scipy
 openpyxl
+pandas
+Pillow
+plotly
+scipy
+streamlit
